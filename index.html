@@ -18,13 +18,13 @@
       }
     </style>
     <script >
+      function getRandomMinMax(min, max) {
+        return Math.random() * (max - min) + min;
+      };
       function changeBGColor(){
           arrayColors = Array('#FFD90F','#FF2D0F', '#73FF0F', '#0F9CFF', '#A20FFF');
           document.body.style.background = arrayColors[getRandomArbitrary(0, 4)];
-      }
-      function getRandomMinMax(min, max) {
-        return Math.random() * (max - min) + min;
-      }
+      };    
     </script>
   </head>
   <body onclick="changeBGColor();">
