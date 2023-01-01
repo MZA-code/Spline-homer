@@ -18,13 +18,20 @@
       }
     </style>
   </head>
-  <body>
+  <body onclick="changeBGColor();">
     <canvas id="canvas3d"></canvas>
     <script type="module">
       import { Application } from './runtime.js';
       const canvas = document.getElementById('canvas3d');
       const app = new Application(canvas);
       app.load('./scene.splinecode');
+      function changeBGColor(){
+          bgColor = Array('#FFD90F','#FF2D0F', '#73FF0F', '#0F9CFF', '#A20FFF');
+          document.body.style.background = bgColor[getRandomArbitrary(0, 4)];
+      }
+      function getRandomMinMax(min, max) {
+        return Math.random() * (max - min) + min;
+      }
     </script>
   </body>
 </html>
