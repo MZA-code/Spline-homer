@@ -13,6 +13,7 @@
       html, body {
         height: 100%;
         cursor: none;
+        transition: all .25s;
       }
       canvas {
         display: block;
@@ -20,12 +21,31 @@
     </style>
   </head>
   <body>
+    <progress id="progressBar" value="0" max="100"></progress>
     <canvas id="canvas3d" onclick="changeBGColor();"></canvas>
     <script type="module">
-      import { Application } from './runtime.js';
+      const progressBar = document.getElementById("progressBar");
       const canvas = document.getElementById('canvas3d');
-      const app = new Application(canvas);
-      app.load('./scene.splinecode');
+      let progress = 0;
+      let idInterval;
+      function updateProgress(newValue) {
+        progressBar.value = newValue;
+      }
+      import('./runtime.js')
+        .then((exports) => {
+          const Application = exports.Application;
+          const app = new Application(canvas);
+          app.load('./scene.splinecode'); 
+          clearInterval(idInterval); 
+          updateProgress(100);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        idInterval = setInterval(() => {
+          progress += 1;
+          updateProgress(progress);
+        }, 200);
     </script>
     <script>
       let idColor = 1;
